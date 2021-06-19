@@ -1,7 +1,7 @@
 //********************************************************
 //
-// Singly Linked List
-// File: linked_list.c
+// Doubly Linked List
+// File: doubly_linked_list.c
 //
 // Copyright (C) <2021>  <Christopher Tall>
 // Licensed under the GPLv3 <https://www.gnu.org/licenses/>.
@@ -13,7 +13,7 @@
 //********************************************************
 #include <stdlib.h>
 #include <stdio.h>
-#include "singly_linked_list.h"
+#include "doubly_linked_list.h"
 
 //********************************************************
 // Add node to the front of the linked list
@@ -22,6 +22,7 @@ void PushNode(NODE** head, int data)
 {
 	NODE* newHead = (NODE*)malloc(sizeof(NODE));	
 	newHead->data = data;
+	newHead->prev = NULL;
 
 	if(*head == NULL)
 	{
@@ -30,6 +31,7 @@ void PushNode(NODE** head, int data)
 	else
 	{
 		newHead->next = *head;
+		(*head)->prev = newHead;
 	}
 	*head = newHead;
 }
@@ -54,6 +56,7 @@ void AppendNode(NODE** head, int data)
 		if(node->next == NULL)
 		{
 			node->next = newNode;
+			newNode->prev = node;
 			break;
 		}
 		node = node->next;	
@@ -69,7 +72,8 @@ void DeleteNode(NODE** head, int data)
 
 	if(*head != NULL && (*head)->data == data)
 	{
-		*head = (*head)->next;	
+		*head = (*head)->next;
+		(*head)->prev = NULL;
 		free(node);
 		return;
 	}
@@ -79,6 +83,7 @@ void DeleteNode(NODE** head, int data)
 		if(node->data == data)
 		{
 			prevNode->next = node->next;
+			node->next->prev = prevNode;
 			free(node);
 			break;
 		}

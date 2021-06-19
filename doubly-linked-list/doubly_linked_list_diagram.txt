@@ -1,0 +1,18 @@
+@startuml
+class Node
+{
+	Node* next;
+	Node* prev;
+	int data;
+} 
+
+class doubly_linked_list
+{
+	void PushNode(Node** head, int data);
+	void AppendNode(Node** head, int data);
+	void DeleteNode(Node** head, int data);
+	void DeleteList(Node** head);
+	void PrintList(Node** head);
+	void ReverseList(Node** head);
+}
+@enduml

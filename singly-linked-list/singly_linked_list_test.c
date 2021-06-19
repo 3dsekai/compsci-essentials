@@ -13,9 +13,9 @@
 //********************************************************
 #include <stdlib.h>
 #include <stdio.h>
-#include "linked_list.h"
+#include "singly_linked_list.h"
 
-int main()
+void SinglyLinkedListTest()
 {
 	NODE* head = NULL;
 	int i = 0;
@@ -101,6 +101,4 @@ int main()
 	printf("Re-reversed List:\n");
 	PrintList(&head);
 	printf("\n");
-
-	return 0;
 }
