@@ -1,7 +1,7 @@
 //********************************************************
 //
 // Singly Linked List
-// File: linked_list.h
+// File: singly_linked_list.h
 //
 // Copyright (C) <2021>  <Christopher Tall>
 // Licensed under the GPLv3 <https://www.gnu.org/licenses/>.

@@ -1,7 +1,7 @@
 //********************************************************
 //
 // Singly Linked List
-// File: linked_list.c
+// File: singly_linked_list.c
 //
 // Copyright (C) <2021>  <Christopher Tall>
 // Licensed under the GPLv3 <https://www.gnu.org/licenses/>.
@@ -20,18 +20,21 @@
 //********************************************************
 void PushNode(NODE** head, int data)
 {
-	NODE* newHead = (NODE*)malloc(sizeof(NODE));	
-	newHead->data = data;
+	NODE* newHead = (NODE*)malloc(sizeof(NODE));
+	if (newHead != NULL)
+	{
+		newHead->data = data;
 
-	if(*head == NULL)
-	{
-		newHead->next = NULL;
+		if (*head == NULL)
+		{
+			newHead->next = NULL;
+		}
+		else
+		{
+			newHead->next = *head;
+		}
+		*head = newHead;
 	}
-	else
-	{
-		newHead->next = *head;
-	}
-	*head = newHead;
 }
 //********************************************************
 // Add node to the back of the linked list
@@ -41,22 +44,25 @@ void AppendNode(NODE** head, int data)
 	NODE* node = *head;
 
 	NODE* newNode = (NODE*)malloc(sizeof(NODE));
-	newNode->data = data;
-	newNode->next = NULL;
+	if (newNode != NULL)
+	{
+		newNode->data = data;
+		newNode->next = NULL;
 
-	if(node == NULL)
-	{
-		*head = newNode;
-		return;
-	}
-	while(node != NULL)
-	{
-		if(node->next == NULL)
+		if (node == NULL)
 		{
-			node->next = newNode;
-			break;
+			*head = newNode;
+			return;
 		}
-		node = node->next;	
+		while (node != NULL)
+		{
+			if (node->next == NULL)
+			{
+				node->next = newNode;
+				break;
+			}
+			node = node->next;
+		}
 	}
 }
 //********************************************************
