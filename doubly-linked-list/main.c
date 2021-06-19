@@ -1,6 +1,6 @@
 //********************************************************
 //
-// Singly Linked List
+// Doubly Linked List
 // File: main.c
 //
 // Copyright (C) <2021>  <Christopher Tall>
@@ -13,9 +13,9 @@
 //********************************************************
 #include <stdlib.h>
 #include <stdio.h>
-#include "singly_linked_list.h"
+#include "doubly_linked_list.h"
 
-void SinglyLinkedListTest()
+int main()
 {
 	NODE* head = NULL;
 	int i = 0;
@@ -69,7 +69,7 @@ void SinglyLinkedListTest()
 	printf("Print deleted nodes...\n");
 	PrintList(&head);
 	printf("\n");
-
+/*
 	//
 	// reverse list
 	//
@@ -101,4 +101,6 @@ void SinglyLinkedListTest()
 	printf("Re-reversed List:\n");
 	PrintList(&head);
 	printf("\n");
+*/
+	return 0;
 }
