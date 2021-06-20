@@ -61,7 +61,7 @@ int main()
 	//
 	//delete list
 	//
-	for(i = 1; i <= 50; i++)
+	for(i = 50; i >= 1; i--)
 	{
 		DeleteNode(&head, i);
 	}
