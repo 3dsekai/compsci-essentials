@@ -75,12 +75,12 @@ void DeleteNode(NODE** head, int data)
 
 	if(*head != NULL && (*head)->data == data)
 	{
-		*head = (*head)->next;	
+		*head = (*head)->next;
 		free(node);
 		return;
 	}
 
-	while(node != NULL)	
+	while(node != NULL)
 	{
 		if(node->data == data)
 		{

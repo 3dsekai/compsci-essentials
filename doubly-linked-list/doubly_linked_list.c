@@ -20,20 +20,23 @@
 //********************************************************
 void PushNode(NODE** head, int data)
 {
-	NODE* newHead = (NODE*)malloc(sizeof(NODE));	
-	newHead->data = data;
-	newHead->prev = NULL;
+	NODE* newHead = (NODE*)malloc(sizeof(NODE));
+	if (newHead != NULL)
+	{
+		newHead->data = data;
+		newHead->prev = NULL;
 
-	if(*head == NULL)
-	{
-		newHead->next = NULL;
+		if (*head == NULL)
+		{
+			newHead->next = NULL;
+		}
+		else
+		{
+			newHead->next = *head;
+			(*head)->prev = newHead;
+		}
+		*head = newHead;
 	}
-	else
-	{
-		newHead->next = *head;
-		(*head)->prev = newHead;
-	}
-	*head = newHead;
 }
 //********************************************************
 // Add node to the back of the linked list
@@ -41,25 +44,28 @@ void PushNode(NODE** head, int data)
 void AppendNode(NODE** head, int data)
 {
 	NODE* node = *head;
-
 	NODE* newNode = (NODE*)malloc(sizeof(NODE));
-	newNode->data = data;
-	newNode->next = NULL;
 
-	if(node == NULL)
+	if (newNode != NULL)
 	{
-		*head = newNode;
-		return;
-	}
-	while(node != NULL)
-	{
-		if(node->next == NULL)
+		newNode->data = data;
+		newNode->next = NULL;
+
+		if (node == NULL)
 		{
-			node->next = newNode;
-			newNode->prev = node;
-			break;
+			*head = newNode;
+			return;
 		}
-		node = node->next;	
+		while (node != NULL)
+		{
+			if (node->next == NULL)
+			{
+				node->next = newNode;
+				newNode->prev = node;
+				break;
+			}
+			node = node->next;
+		}
 	}
 }
 //********************************************************
@@ -73,7 +79,10 @@ void DeleteNode(NODE** head, int data)
 	if(*head != NULL && (*head)->data == data)
 	{
 		*head = (*head)->next;
-		(*head)->prev = NULL;
+		if (*head != NULL)
+		{
+			(*head)->prev = NULL;
+		}
 		free(node);
 		return;
 	}
@@ -83,7 +92,10 @@ void DeleteNode(NODE** head, int data)
 		if(node->data == data)
 		{
 			prevNode->next = node->next;
-			node->next->prev = prevNode;
+			if (node->next != NULL)
+			{
+				node->next->prev = prevNode;
+			}
 			free(node);
 			break;
 		}
@@ -130,6 +142,7 @@ void ReverseList(NODE** head)
 	{
 		nextNode = currentNode->next;
 		currentNode->next = prevNode;
+		currentNode->prev = nextNode;
 		prevNode = currentNode;
 		currentNode = nextNode;
 	}
