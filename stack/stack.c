@@ -13,17 +13,26 @@
 //********************************************************
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 #include "stack.h"
 
 //********************************************************
 // Push item to the stack
 //********************************************************
-void Push(NODE** top, int item)
+void Push(NODE** top, DATA item)
 {
 	NODE* node = (NODE*)malloc(sizeof(NODE));
+	assert(node != NULL);
+
+	DATA* newItem = (DATA*)malloc(sizeof(DATA));
+	assert(newItem != NULL);
+
+	newItem->character = item.character;
+	newItem->id = item.id;
+
 	if (node != NULL)
 	{
-		node->data = item;
+		node->data = newItem;
 
 		if ((*top) == NULL)
 		{
@@ -41,16 +50,24 @@ void Push(NODE** top, int item)
 //********************************************************
 // Pop item from the stack
 //********************************************************
-int Pop(NODE** top)
+DATA Pop(NODE** top)
 {
-	int r = -1;
+	DATA r;
+	{
+		r.id = -1;
+		r.character = '\0';
+	}
 	NODE* node = (*top);
 	
 	if ((*top) != NULL)
 	{
-		r = (*top)->data;
+		r = (*(*top)->data);
 		(*top) = (*top)->next;
+		
+		free(node->data);
+		node->data = NULL;
 		free(node);
+		node = NULL;
 	}
 
 	return r;
@@ -64,17 +81,24 @@ int Pop(NODE** top)
 //********************************************************
 // Find an item in the stack
 //********************************************************
-int Find(NODE** top, int id)
+DATA Find(NODE** top, int id)
 {
-	int r = -1;
+	DATA r;
+	{
+		r.character = '\0';
+		r.id = -1;
+	}
 	NODE* node = (*top);
 
 	while (node != NULL)
 	{
-		if (node->data == id)
+		if (node->data != NULL)
 		{
-			r = node->data;
-			break;
+			if (node->data->id == id)
+			{
+				r = *(node->data);
+				break;
+			}
 		}
 		node = node->next;
 	}
@@ -97,8 +121,11 @@ void PrintStack(NODE** top)
 	NODE* node = (*top);
 	while (node != NULL)
 	{
-		printf("%d\n", node->data);
-		node = node->next;
+		if (node->data != NULL)
+		{
+			printf("{ID: %d, CHARACTER: %c}\n", node->data->id, node->data->character);
+			node = node->next;
+		}
 	}
 }
 
@@ -111,7 +138,12 @@ void EraseStack(NODE** top)
 	while (node != NULL)
 	{
 		NODE* next = node->next;
+
+		free(node->data);
+		node->data = NULL;
 		free(node);
+		node = NULL;
+
 		node = next;
 	}
 	(*top) = node;

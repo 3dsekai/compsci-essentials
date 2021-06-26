@@ -24,9 +24,14 @@ int main()
 	//
 	//push nodes to stack
 	//
-	for (i = 1; i <= 50; i++)
+	for (i = 0; i < 26; i++)
 	{
-		Push(&top, i);
+		DATA item;
+		{
+			item.id = i;
+			item.character = 'A' + i;
+		}
+		Push(&top, item);
 	}
 	//print stack
 	printf("*************************************\n");
@@ -53,9 +58,14 @@ int main()
 	//
 	//Re-push nodes
 	//
-	for (i = 50; i >= 1; i--)
+	for (i = 25; i >= 0; i--)
 	{
-		Push(&top, i);
+		DATA item;
+		{
+			item.id = i;
+			item.character = 'A' + i;
+		}
+		Push(&top, item);
 	}
 
 	//print stack
@@ -69,11 +79,15 @@ int main()
 	printf("*************************************\n");
 	printf("Find Node\n");
 	printf("*************************************\n");
-	int data = -1;
-	data = Find(&top, 14);
-	if (data != -1)
+	DATA item;
 	{
-		printf("Node ID is: %d\n", data);
+		item.character = '\0';
+		item.id = -1;
+	}
+	item = Find(&top, 13);
+	if (item.id != -1)
+	{
+		printf("Data ID is: %d\nData Character is: %c", item.id, item.character);
 	}
 	else
 	{

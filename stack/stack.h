@@ -20,19 +20,25 @@ typedef enum
 //********************************************************
 // structs
 //********************************************************
+typedef struct Data
+{
+	char character;
+	int id;
+} DATA;
+
 typedef struct Node
 {
-	int data;
+	DATA* data;
 	struct Node* next;
 } NODE;
 
 //********************************************************
 // method declarations
 //********************************************************
-void Push(NODE** top, int id);
-int Pop(NODE** top);
+void Push(NODE** top, DATA item);
+DATA Pop(NODE** top);
 //int Peek();
-int Find(NODE** top, int id);
+DATA Find(NODE** top, int id);
 BOOL IsEmpty(NODE** top);
 void PrintStack(NODE** top);
 void EraseStack(NODE** top);
