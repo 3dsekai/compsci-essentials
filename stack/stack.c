@@ -76,7 +76,22 @@ DATA Pop(NODE** top)
 //********************************************************
 // Peek at the item on top of the stack
 //********************************************************
-//int Peek();
+DATA Peek(NODE** top)
+{
+	DATA r;
+	{
+		r.id = -1;
+		r.character = '\0';
+	}
+	if ((*top) != NULL)
+	{
+		if ((*top)->data != NULL)
+		{
+			r = (*(*top)->data);
+		}
+	}
+	return r;
+}
 
 //********************************************************
 // Find an item in the stack

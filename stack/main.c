@@ -16,6 +16,23 @@
 #include <assert.h>
 #include "stack.h"
 
+//********************************************************
+// method declarations
+//********************************************************
+BOOL IsDataInvalid(DATA data);
+
+//********************************************************
+// Is this data invalid?
+//********************************************************
+BOOL IsDataInvalid(DATA data)
+{
+	if (data.id == -1)
+	{
+		return TRUE;
+	}
+	return FALSE;
+}
+
 int main()
 {
 	NODE* top = NULL;
@@ -75,7 +92,17 @@ int main()
 	PrintStack(&top);
 	printf("\n");
 
-	//print stack
+	printf("Peek in Stack:\n");
+	DATA peek = Peek(&top);
+	if (!IsDataInvalid(peek))
+	{
+		printf("{ID: %d, CHARACTER: %c}\n\n", peek.id, peek.character);
+	}
+	else
+	{
+		printf("No data in stack to peek.\n\n");
+	}
+	//Find node in stack
 	printf("*************************************\n");
 	printf("Find Node\n");
 	printf("*************************************\n");
@@ -87,7 +114,7 @@ int main()
 	item = Find(&top, 13);
 	if (item.id != -1)
 	{
-		printf("Data ID is: %d\nData Character is: %c", item.id, item.character);
+		printf("Data ID is: %d\nData Character is: %c\n", item.id, item.character);
 	}
 	else
 	{

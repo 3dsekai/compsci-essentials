@@ -13,8 +13,8 @@
 //********************************************************
 typedef enum
 {
-	TRUE,
-	FALSE
+	FALSE = 0,
+	TRUE
 } BOOL;
 
 //********************************************************
@@ -37,7 +37,7 @@ typedef struct Node
 //********************************************************
 void Push(NODE** top, DATA item);
 DATA Pop(NODE** top);
-//int Peek();
+DATA Peek(NODE** top);
 DATA Find(NODE** top, int id);
 BOOL IsEmpty(NODE** top);
 void PrintStack(NODE** top);
